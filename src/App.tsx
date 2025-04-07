@@ -146,7 +146,7 @@ function App() {
   
     // Convert GeoJSON features to CSV rows
     const rows = filteredGeoData.features.map((feature) => {
-      const { nom, adresse_postale, type_equipement_ou_lieu, code_insee_epci } = feature.properties;
+      const { nom, adresse_postale, type_equipement_ou_lieu, code_insee_epci, telephone, email } = feature.properties;
       const [lng, lat] = feature.geometry.coordinates;
       return {
         Nom: nom || 'Nom non disponible',
@@ -155,13 +155,15 @@ function App() {
         Longitude: lng,
         Latitude: lat,
         SIREN: code_insee_epci,
+        email: email || 'email non disponible',
+        telephone: telephone ? `'${telephone}'` : 'telephone non disponible',
       };
     });
   
     // Convert rows to CSV string
     const csvContent =
       'data:text/csv;charset=utf-8,' +
-      ['Nom,Adresse,Type,Longitude,Latitude, SIREN']
+      ['Nom,Adresse,Type,Longitude,Latitude, SIREN, email, telephone']
         .concat(rows.map((row) => Object.values(row).join(',')))
         .join('\n');
   
@@ -176,27 +178,85 @@ function App() {
   };
 
   const FilteredGeoJSON = () => {
-    const onEachFeature = (feature: GeoJSON.Feature<GeoJSON.Geometry, any>, layer: L.Layer) => {
-      if (feature.properties) {
-        const { nom, adresse_postale, type_equipement_ou_lieu, code_insee_epci } = feature.properties;
-
-        // Bind a styled popup to the feature
-        layer.bindPopup(
-          `
-          <div style="font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5;">
-            <strong style="font-size: 16px; color: #333;">${nom || 'Nom non disponible'}</strong>
-            <br />
-            <span style="color: #555;">${adresse_postale || 'Adresse non disponible'}</span>
-            <br />
-            <span style="color: #555;">${type_equipement_ou_lieu || 'Type non disponible'}</span>
-            <br />
-            <span style="color: #555;">INSEE / SIREN : ${code_insee_epci || 'non disponible'}</span>
-          </div>
-          `
+    const apiCache: { [key: string]: { telephone: string; email: string } } = {};
+  
+    const fetchBatchData = async (codes: string[]) => {
+      try {
+        // Join codes into a single query parameter
+        const codesQuery = codes.map(encodeURIComponent).join('|');
+        const response = await fetch(
+          `https://tabular-api.data.gouv.fr/api/resources/c4cdd239-c82d-41ac-b0fb-530cccbab108/data/?N%C2%B0%20SIREN__in=${codesQuery}`
         );
+        const data = await response.json();
+        // Process the response and cache the results
+        data.data.forEach((item: any) => {
+          const code = item['N° SIREN'];
+          const telephone = item['Téléphone du siège'] || item['Téléphone administrative'] || 'non disponible';
+          const email = item['Courriel du siège'] || 'non disponible';
+  
+          // Cache the response
+          apiCache[code] = { telephone, email };
+        });
+      } catch (error) {
+        console.error('Error fetching batch data:', error);
       }
     };
-
+  
+    const onEachFeature = async (feature: GeoJSON.Feature<GeoJSON.Geometry, any>, layer: L.Layer) => {
+      if (feature.properties) {
+        const { nom, adresse_postale, type_equipement_ou_lieu, code_insee_epci } = feature.properties;
+        
+        if (code_insee_epci) {
+          // Check if the data is already in the cache
+          if (apiCache[code_insee_epci]) {
+            const { telephone, email } = apiCache[code_insee_epci];
+            bindPopup(layer, nom, adresse_postale, type_equipement_ou_lieu, code_insee_epci, telephone, email);
+          } else {
+            // Fetch data in batches
+            const codesToFetch = [code_insee_epci]; // Add the current code to the batch
+            await fetchBatchData(codesToFetch);
+  
+            // Retrieve the cached data after the batch fetch
+            const { telephone, email } = apiCache[code_insee_epci] || { telephone: 'non disponible', email: 'non disponible' };
+            feature.properties.telephone = telephone;
+            feature.properties.email = email;
+            bindPopup(layer, nom, adresse_postale, type_equipement_ou_lieu, code_insee_epci, telephone, email);
+          }
+        } else {
+          // Bind a default popup if no code_insee_epci is available
+          bindPopup(layer, nom, adresse_postale, type_equipement_ou_lieu, 'non disponible', 'non disponible', 'non disponible');
+        }
+      }
+    };
+  
+    const bindPopup = (
+      layer: L.Layer,
+      nom: string | undefined,
+      adresse_postale: string | undefined,
+      type_equipement_ou_lieu: string | undefined,
+      code_insee_epci: string | undefined,
+      telephone: string,
+      email: string
+    ) => {
+      layer.bindPopup(
+        `
+        <div style="font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5;">
+          <strong style="font-size: 16px; color: #333;">${nom || 'Nom non disponible'}</strong>
+          <br />
+          <span style="color: #555;">${adresse_postale || 'Adresse non disponible'}</span>
+          <br />
+          <span style="color: #555;">${type_equipement_ou_lieu || 'Type non disponible'}</span>
+          <br />
+          <span style="color: #555;">INSEE / SIREN : ${code_insee_epci || 'non disponible'}</span>
+          <br />
+          <span style="color: #555;">Téléphone : ${telephone}</span>
+          <br />
+          <span style="color: #555;">Email : ${email}</span>
+        </div>
+        `
+      );
+    };
+  
     return filteredGeoData ? (
       <GeoJSON data={filteredGeoData} onEachFeature={onEachFeature} />
     ) : null;
