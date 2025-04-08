@@ -25,8 +25,8 @@ This project is a web application that visualizes and filters GeoJSON data on a 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/open-data-challenge.git
-   cd open-data-challenge
+   git clone https://github.com/qgiraux/CulturTour.git
+   cd CulturTour
    ```
 
 2. Install dependencies:
