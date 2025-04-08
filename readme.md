@@ -1,4 +1,4 @@
-# Open Data Challenge
+# CulturTour
 
 This project is a web application that visualizes and filters GeoJSON data on a map. It allows users to search for locations, filter data by type and distance, and export filtered results to a CSV file. The application also fetches additional information (telephone and email) for each feature from an external API.
 
