@@ -28,10 +28,10 @@ function App() {
   const [filteredGeoData, setFilteredGeoData] = useState<GeoJSONData | null>(null);
   const [equipmentTypes, setEquipmentTypes] = useState<string[]>([]);
   const [selectedType, setSelectedType] = useState<string | null>(null);
-  const [selectedPoint, setSelectedPoint] = useState<L.LatLng | null>(null);
-  const [distance, setDistance] = useState<number>(50);
+  const [selectedPoint, setSelectedPoint] = useState<L.LatLng | null>(L.latLng(46.603354, 1.888334));
+  const [distance, setDistance] = useState<number>(10);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>(''); // Initialize with an empty string
 
   const handleSearch = async () => {
     if (!searchQuery || !mapInstance) return;
@@ -189,14 +189,16 @@ function App() {
         );
         const data = await response.json();
         // Process the response and cache the results
-        data.data.forEach((item: any) => {
-          const code = item['N° SIREN'];
-          const telephone = item['Téléphone du siège'] || item['Téléphone administrative'] || 'non disponible';
-          const email = item['Courriel du siège'] || 'non disponible';
-  
-          // Cache the response
-          apiCache[code] = { telephone, email };
-        });
+        if(data.data){
+          data.data.forEach((item: any) => {
+            const code = item['N° SIREN'];
+            const telephone = item['Téléphone du siège'] || item['Téléphone administrative'] || 'non disponible';
+            const email = item['Courriel du siège'] || 'non disponible';
+    
+            // Cache the response
+            apiCache[code] = { telephone, email };
+          });
+        }
       } catch (error) {
         console.error('Error fetching batch data:', error);
       }
@@ -451,7 +453,7 @@ function App() {
 
       {/* Map */}
       <div style={{ flex: 1 }}>
-        <MapContainer center={[46.603354, 1.888334]} zoom={15} style={{ height: '100%', width: '100%' }}>
+        <MapContainer center={[46.603354, 1.888334]} zoom={12} style={{ height: '100%', width: '100%' }}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
