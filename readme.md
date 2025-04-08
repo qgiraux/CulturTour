@@ -27,15 +27,22 @@ This project is a web application that visualizes and filters GeoJSON data on a 
    ```bash
    git clone https://github.com/your-username/open-data-challenge.git
    cd open-data-challenge
+   ```
 
 2. Install dependencies:
-```npm install```
+    ```bash
+    npm install
+    ```
 
 3. Start the development server:
-```npm start```
+    ```bash
+    npm start
+    ```
 
 4. Open your browser and navigate to:
-```http://localhost:3000```
+    ```bash
+    http://localhost:3000
+    ```
 
 ## Usage
 1. Search for a Location
