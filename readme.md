@@ -48,30 +48,30 @@ This project is a web application that visualizes and filters GeoJSON data on a 
 
 ## Usage
 1. Search for a Location  
-Enter a location in the search bar on the left panel.  
-Click the "Search" button to center the map on the searched location.  
+  Enter a location in the search bar on the left panel.  
+  Click the "Search" button to center the map on the searched location.  
 2. Filter Data  
-Use the checkboxes to filter by types of equipment or locations.  
-Adjust the distance slider to filter features within a specific radius of the selected point.  
-Click on the map to select a point for distance filtering.  
+  Use the checkboxes to filter by types of equipment or locations.  
+  Adjust the distance slider to filter features within a specific radius of the selected point.  
+  Click on the map to select a point for distance filtering.  
 3. View Feature Details  
-Click on a feature on the map to view its details in a popup.  
-The popup includes:  
-Name  
-Address  
-Type  
-INSEE/SIREN code  
-Telephone  
-Email  
+  Click on a feature on the map to view its details in a popup.  
+  The popup includes:  
+    Name  
+    Address  
+    Type  
+    INSEE/SIREN code  
+    Telephone  
+    Email  
 4. Export to CSV  
-After applying filters, click the "Export to CSV" button to download the filtered data as a CSV file.  
+  After applying filters, click the "Export to CSV" button to download the filtered data as a CSV file.  
 
 ##Project Structure
 ```
 src/
 ├── App.tsx               # Main application component
 ├── components/           # Reusable components
-├── assets/               # Static assets (e.g., images, icons)
+├── public/               # Static assets (e.g., images, geojson)
 ├── styles/               # CSS or SCSS files
 └── utils/                # Utility functions
 ```
