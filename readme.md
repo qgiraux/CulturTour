@@ -31,6 +31,8 @@ This project is a web application that visualizes and filters GeoJSON data on a 
 
 2. Install dependencies:
     ```bash
+    nvm install node
+    nvm install --lts
     npm install
     ```
 
