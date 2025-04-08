@@ -66,7 +66,7 @@ function App() {
 
   useEffect(() => {
     // Fetch GeoJSON data and extract unique equipment types
-    fetch('/cleaned.geojson')
+    fetch(`${import.meta.env.BASE_URL}cleaned.geojson`)
       .then((response) => response.json())
       .then((data: GeoJSONData) => {
         setGeoData(data);
