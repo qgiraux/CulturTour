@@ -3,6 +3,23 @@ import { MapContainer, TileLayer, GeoJSON, useMapEvents, Marker, Popup, useMap }
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+// Import default Leaflet marker icon and shadow
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
+// Fix Leaflet's default icon issue
+const DefaultIcon = L.icon({
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+  iconSize: [25, 41], // Default size
+  iconAnchor: [12, 41], // Anchor point
+  popupAnchor: [1, -34], // Popup position
+  shadowSize: [41, 41], // Shadow size
+});
+
+// Set the default icon globally
+L.Marker.prototype.options.icon = DefaultIcon;
+
 // Define a type for GeoJSON data
 type GeoJSONFeature = {
   type: 'Feature';
