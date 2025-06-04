@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artiste Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Top right profile/settings/logout options -->
+    <header>
+        <section class="options">
+            <a href="#" class="option"><i class="icon-profile"></i> Mon Profil</a>
+            <a href="#" class="option"><i class="icon-settings"></i> Paramètres</a>
+            <a href="#" class="option"><i class="icon-logout"></i> Déconnexion</a>
+        </section>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="flex-grow pt-[20vh] px-4">
+
+        <!-- First row: event buttons -->
+        <section class="grid grid-cols-1 md:grid-cols-4 gap-6 w-full max-w-[60vw] mx-auto mb-[5vh]">
+            <div class="p-4 bg-rose-500 text-white rounded-lg hover:bg-rose-400 transition">
+                <a href="evenements_passes.html" class="block text-center">Voir les évènements passés</a>
+            </div>
+            <div class="p-4 bg-amber-500 text-white rounded-lg hover:bg-amber-400 transition">
+                <a href="evenements_organises.html" class="block text-center">Voir les évènements organisés</a>
+            </div>
+            <div class="p-4 bg-emerald-500 text-white rounded-lg hover:bg-emerald-400 transition">
+                <a href="creer_evenement.html" class="block text-center">Ouvrir des dates</a>
+            </div>
+            <div class="p-4 bg-fuchsia-500 text-white rounded-lg hover:bg-fuchsia-400 transition">
+                <a href="statistiques.html" class="block text-center">Contrats en négociation</a>
+            </div>
+        </section>
+
+        <!-- Second row: feedback/help -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-[45vw] mx-auto mb-[5vh]">
+            <div class="p-4 bg-sky-500 text-white rounded-lg hover:bg-sky-400 transition">
+                <a href="feedback.html" class="block text-center">Voir les statistiques</a>
+            </div>
+            <div class="p-4 bg-indigo-500 text-white rounded-lg hover:bg-indigo-400 transition">
+                <a href="notifications.html" class="block text-center">Voir les notifications</a>
+            </div>
+            <div class="p-4 bg-lime-500 text-white rounded-lg hover:bg-lime-400 transition">
+                <a href="aide.html" class="block text-center">Aide et Support</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-white py-4">
+        &copy; 2023 CulturTour. Tous droits réservés.
+    </footer>
+      
+
+</body>
+</html>
