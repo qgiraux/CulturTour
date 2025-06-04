@@ -1,4 +1,4 @@
-{
+const artists = {
     "Artist_1": {
         "name": "The RockMasters",
         "genre": "Rock",
@@ -200,3 +200,5 @@
         }
     }
 }
+
+export default artists;
