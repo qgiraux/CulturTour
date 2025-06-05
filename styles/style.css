@@ -75,6 +75,14 @@ button:hover {
     margin-bottom: 20px;
 }
 
+#calendar-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px; /* Increased margin for spacing */
+    gap: 10px;
+}
+
 .calendar-day {
     padding: 10px;
     background-color: #f0f0f0;

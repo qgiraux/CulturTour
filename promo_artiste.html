@@ -1,0 +1,23 @@
+<section id="artist-event">
+    <h1>Artist Event Promotion</h1>
+    <p>
+        Between <strong>July 1st and July 10th, 2026</strong>, dates are reserved exclusively for Ile-de-France mayors.
+    </p>
+    <p>
+        A reduction of <strong>10%</strong> is applied for bookings during this period. If more than <strong>6 dates</strong> are booked, the reduction increases to <strong>20%</strong>.
+    </p>
+    <form id="booking-form">
+        <label for="dates">Select number of dates to book:</label>
+        <input type="number" id="dates" name="dates" min="1" max="10" required>
+        <button type="submit">Calculate Reduction</button>
+    </form>
+    <p id="reduction-result"></p>
+</section>
+<script>
+    document.getElementById('booking-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const dates = parseInt(document.getElementById('dates').value, 10);
+        let reduction = dates > 6 ? 20 : 10;
+        document.getElementById('reduction-result').textContent = `Your reduction is ${reduction}%.`;
+    });
+</script>

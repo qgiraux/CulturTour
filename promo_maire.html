@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maire Dashboard</title>
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Top right profile/settings/logout options -->
+    <header>
+        <section class="options">
+            <a href="#" class="option"><i class="icon-profile"></i> Mon Profil</a>
+            <a href="#" class="option"><i class="icon-settings"></i> Paramètres</a>
+            <a href="index.html" class="option"><i class="icon-logout"></i> Déconnexion</a>
+            <a href="maire.html" class="option"><i class="icon-home"></i> Accueil</a>
+        </section>
+    </header>
+<body>
+    <div class="promo-container" style="padding: 2vh; font-size: 2.1rem; max-width: 45vw; margin: auto; margin-top: 7vh;">
+        <img id="promo-image" class="promo-image" src="ressources/image1.jpg" alt="Promo Image" style="width: 10vw;">
+        <P1><strong><a href="The_RockMasters.html" style="color: purple;">The RockMasters</a></strong></P1>
+        <div id="promo-description" style="margin: 2vh;">
+            <p><strong>Dates:</strong> du 1er au 10 Juillet 2026</p>
+            <p><strong>Region:</strong> Ile de France</p>
+            <div id="promo-paliers" style="margin: 2vh;">
+                <div class="palier" style="background-color: greenyellow;">
+                    <strong>Palier 1:</strong> 10% de réduction pour toute réservation durant cette période.
+                </div>
+                <div class="palier" style="background-color: orangered;">
+                    <strong>Palier 2:</strong> 20% de réduction pour plus de 6 dates réservées.
+                </div>
+                <div class="palier" style="background-color: orangered;">
+                    <strong>Palier 3:</strong> 30% de réduction pour plus de 8 dates réservées.
+                </div>
+            </div>
+        </div>
+        <h2>Réservations:</h2>
+        <script src='promo_calendar.js' type="module">
+
+        </script>
+        <div id="calendar-controls">
+            <span id="monthDisplay">July 2026</span>
+        </div>
+        <div id="calendar"></div>
+        <ul id="artistList" style="padding-top: 2vh;"></ul>
+    </div>
+</body>
+</html>

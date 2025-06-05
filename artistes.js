@@ -3,6 +3,18 @@ const artists = {
         "name": "The RockMasters",
         "genre": "Rock",
         "tournées" : {
+            "01/07/2026": {
+                "location": "18 rue Eugène Varlin, 94800 Villejuif",
+                "client": "Ville de Villejuif"
+            },
+            "04/07/2026": {
+                "location": "456 avenue des Champs, 75008 Paris",
+                "client": "Ville de Paris"
+            },
+            "07/07/2026": {
+                "location": "46 rue de Mareil 78112 Saint-Germain-en-Laye",
+                "client": "Mairie de Saint-Germain-en-Laye"
+            },
             "14/07/2026": {
                 "location": "123 rue du moulin, 75004 Paris",
                 "client": "Mairie de Paris"
@@ -171,7 +183,7 @@ const artists = {
                 "location": "123 rue des Chants, 75003 Paris",
                 "client": "Festival Folk Paris"
             },
-            "10/07/2026": {
+            "03/07/2026": {
                 "location": "56 avenue des Ballades, 69002 Lyon",
                 "client": "Salle Folk Lyon"
             },

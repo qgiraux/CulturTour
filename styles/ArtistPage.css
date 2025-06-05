@@ -1,0 +1,139 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #222;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #444;
+}
+
+#band-description p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+#band-members ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#band-members li {
+    margin: 5px 0;
+}
+
+#gallery .image-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+#gallery img {
+    width: 200px;
+    height: auto;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+footer {
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+}
+
+.go-home-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #444;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.go-home-button:hover {
+    background-color: #666;
+}
+
+/* Top-right options menu */
+.options {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+/* Option buttons (modern style) */
+.option {
+    --bezier: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --edge-light: hsla(0, 0%, 50%, 0.8);
+    --text-light: rgba(255, 255, 255, 0.4);
+    --back-color: 240, 40%;
+
+    cursor: pointer;
+    padding: 0.7em 1em;
+    border-radius: 0.5em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+
+    font-size: 1rem;
+    font-weight: bold;
+    background: linear-gradient(
+        140deg,
+        hsla(var(--back-color), 50%, 1) 20%,
+        hsla(var(--back-color), 50%, 0.6) 100%
+    );
+    color: hsla(0, 0%, 90%);
+    border: 0;
+    box-shadow: inset 0.4px 1px 4px var(--edge-light);
+    transition: all 0.1s var(--bezier);
+}
+
+.option:hover {
+    --edge-light: hsla(0, 0%, 50%, 1);
+    text-shadow: 0px 0px 10px var(--text-light);
+    box-shadow: inset 0.4px 1px 4px var(--edge-light),
+                2px 4px 8px hsla(0, 0%, 0%, 0.295);
+    transform: scale(1.05);
+}
+
+.option:active {
+    background: linear-gradient(
+        140deg,
+        hsla(var(--back-color), 50%, 1) 20%,
+        hsla(var(--back-color), 50%, 0.6) 100%
+    );
+    box-shadow: inset 0.4px 1px 8px var(--edge-light),
+                0px 0px 8px hsla(var(--back-color), 50%, 0.6);
+    color: white;
+    letter-spacing: 0.1em;
+    transform: scale(0.98);
+}
